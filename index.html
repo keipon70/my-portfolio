@@ -1,11 +1,364 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <title>My Portfolio</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>〇〇美容室 | あなたらしさが、もっと輝く</title>
+  <style>
+    :root{
+      --bg:#0b0f14;
+      --card:#111826;
+      --text:#e8eef7;
+      --muted:#b9c3d3;
+      --brand:#79d7c1;
+      --line:rgba(255,255,255,.12);
+      --shadow:0 10px 30px rgba(0,0,0,.35);
+      --radius:16px;
+      --max:1040px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans JP", sans-serif;
+      color:var(--text);
+      background: radial-gradient(1200px 600px at 20% 0%, rgba(121,215,193,.16), transparent 60%),
+                  radial-gradient(900px 500px at 80% 10%, rgba(95,154,255,.12), transparent 55%),
+                  var(--bg);
+      line-height:1.7;
+    }
+    a{color:inherit; text-decoration:none}
+    .container{max-width:var(--max); margin:0 auto; padding:0 18px}
+    header{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(10px);
+      background: rgba(11,15,20,.6);
+      border-bottom:1px solid var(--line);
+    }
+    .nav{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:12px 0;
+      gap:14px;
+    }
+    .brand{
+      font-weight:700; letter-spacing:.02em;
+      display:flex; align-items:center; gap:10px;
+      white-space:nowrap;
+    }
+    .dot{
+      width:10px; height:10px; border-radius:50%;
+      background:var(--brand);
+      box-shadow: 0 0 0 6px rgba(121,215,193,.12);
+    }
+    nav ul{
+      list-style:none; display:flex; gap:14px;
+      padding:0; margin:0; flex-wrap:wrap; justify-content:flex-end;
+    }
+    nav a{
+      display:inline-block;
+      padding:8px 10px;
+      border-radius:12px;
+      color:var(--muted);
+    }
+    nav a:hover{background:rgba(255,255,255,.06); color:var(--text)}
+    .cta{
+      display:inline-block;
+      padding:10px 14px;
+      border-radius:999px;
+      background: linear-gradient(135deg, rgba(121,215,193,.18), rgba(95,154,255,.16));
+      border:1px solid var(--line);
+      color:var(--text);
+      box-shadow: var(--shadow);
+      white-space:nowrap;
+    }
+
+    .hero{padding:44px 0 28px}
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap:22px;
+      align-items:center;
+    }
+    @media (max-width: 860px){
+      .hero-grid{grid-template-columns:1fr}
+    }
+    .kicker{color:var(--muted); margin:0 0 10px}
+    h1{font-size:clamp(34px, 4vw, 54px); line-height:1.15; margin:0 0 12px}
+    .lead{color:var(--muted); font-size:1.05rem; margin:0 0 18px}
+    .hero-actions{display:flex; gap:10px; flex-wrap:wrap; margin-top:14px}
+    .btn{
+      padding:12px 14px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.05);
+      color:var(--text);
+      display:inline-flex; align-items:center; gap:8px;
+    }
+    .btn.primary{
+      background: rgba(121,215,193,.16);
+      border-color: rgba(121,215,193,.35);
+    }
+    .card{
+      background: rgba(17,24,38,.72);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .img{
+      width:100%;
+      aspect-ratio: 16 / 10;
+      object-fit:cover;
+      display:block;
+    }
+    section{padding:26px 0}
+    .section-title{
+      margin:0 0 12px;
+      font-size: 1.35rem;
+      letter-spacing:.01em;
+    }
+    .section-sub{margin:0 0 14px; color:var(--muted)}
+    .grid-3{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:14px;
+    }
+    @media (max-width: 900px){ .grid-3{grid-template-columns:1fr} }
+
+    .price{
+      padding:16px;
+    }
+    .price h3{margin:0 0 6px; font-size:1.1rem}
+    .yen{margin-top:10px; font-weight:700; font-size:1.15rem}
+    .note{color:var(--muted); font-size:.95rem; margin:10px 0 0}
+
+    .staff{
+      display:grid; grid-template-columns: 220px 1fr; gap:14px; align-items:start;
+      padding:16px;
+    }
+    @media (max-width: 700px){ .staff{grid-template-columns:1fr} }
+    .avatar{
+      width:100%;
+      border-radius:14px;
+      aspect-ratio: 4 / 3;
+      object-fit:cover;
+      border:1px solid var(--line);
+    }
+
+    .voices{display:grid; grid-template-columns: repeat(3, 1fr); gap:14px;}
+    @media (max-width: 900px){ .voices{grid-template-columns:1fr} }
+    blockquote{
+      margin:0;
+      padding:16px;
+      border-left:4px solid rgba(121,215,193,.55);
+      background: rgba(255,255,255,.04);
+      border-radius:14px;
+      border:1px solid var(--line);
+    }
+    blockquote footer{margin-top:10px; color:var(--muted); font-size:.95rem}
+
+    .access-grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:14px;
+      align-items:stretch;
+    }
+    @media (max-width: 900px){ .access-grid{grid-template-columns:1fr} }
+    .map{
+      padding:0;
+      min-height:320px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:var(--muted);
+      text-align:center;
+    }
+    .info{padding:16px}
+    .info h3{margin:0 0 10px}
+    .info p{margin:0 0 10px; color:var(--muted)}
+    .big-cta{
+      margin-top:14px;
+      display:inline-block;
+      padding:12px 16px;
+      border-radius:14px;
+      background: rgba(121,215,193,.16);
+      border:1px solid rgba(121,215,193,.35);
+      font-weight:700;
+    }
+
+    footer{
+      padding:26px 0 34px;
+      border-top:1px solid var(--line);
+      color:var(--muted);
+      text-align:center;
+    }
+    .anchor{scroll-margin-top:78px}
+  </style>
 </head>
+
 <body>
-  <h1>GitHub Pages 公開成功</h1>
-  <p>このページは GitHub Pages で公開されています。</p>
+  <header>
+    <div class="container nav">
+      <div class="brand"><span class="dot"></span>〇〇美容室</div>
+      <nav aria-label="メインメニュー">
+        <ul>
+          <li><a href="#about">サロン紹介</a></li>
+          <li><a href="#menu">メニュー</a></li>
+          <li><a href="#staff">スタッフ</a></li>
+          <li><a href="#access">アクセス</a></li>
+          <li><a class="cta" href="#reservation">予約する</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <div class="container hero">
+      <div class="hero-grid">
+        <div>
+          <p class="kicker">あなたらしさが、もっと輝く。</p>
+          <h1>あなたらしさが、<br>もっと輝く。</h1>
+          <p class="lead">
+            初めてでも安心。新宿の隠れ家サロンで、<br>
+            心地よいひとときをお過ごしください。
+          </p>
+          <div class="hero-actions">
+            <a class="btn primary" href="#menu">メニューを見る</a>
+            <a class="btn" href="#access">アクセス</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <img class="img" alt="明るい自然光が差し込む落ち着いたサロンの店内"
+               src="https://api.felo.ai/images/s/2NZhQDL4U6">
+        </div>
+      </div>
+    </div>
+
+    <!-- ABOUT -->
+    <section id="about" class="anchor">
+      <div class="container">
+        <p class="kicker">Welcome</p>
+        <h2 class="section-title">サロンについて</h2>
+        <p class="section-sub">
+          「〇〇美容室」は、あなたの髪と心に寄り添う場所。<br>
+          丁寧なカウンセリングで、毎日のキレイをお手伝いします。
+        </p>
+      </div>
+    </section>
+
+    <!-- MENU -->
+    <section id="menu" class="anchor">
+      <div class="container">
+        <h2 class="section-title">メニュー &amp; 料金</h2>
+        <p class="section-sub">シンプルで分かりやすい料金設定です</p>
+
+        <div class="grid-3">
+          <div class="card price">
+            <h3>カット</h3>
+            <p class="section-sub">
+              骨格や髪質に合わせた似合わせカット。<br>
+              再現性の高いスタイルをご提案します。
+            </p>
+            <div class="yen">¥5,500</div>
+          </div>
+
+          <div class="card price">
+            <h3>カラー</h3>
+            <p class="section-sub">
+              透明感のある肌映えカラー。<br>
+              髪へのダメージを最小限に抑えます。
+            </p>
+            <div class="yen">¥7,000</div>
+          </div>
+
+          <div class="card price">
+            <h3>パーマ</h3>
+            <p class="section-sub">
+              毎朝が楽になるふんわりパーマ。<br>
+              柔らかい質感を実現します。
+            </p>
+            <div class="yen">¥10,000</div>
+          </div>
+        </div>
+
+        <p class="note">※すべて税込価格です。ロング料金はかかりません。</p>
+      </div>
+    </section>
+
+    <!-- STAFF -->
+    <section id="staff" class="anchor">
+      <div class="container">
+        <img class="img card" alt="スタイリスト" src="https://api.felo.ai/images/s/5bCKgNhmWV">
+        <div style="height:14px"></div>
+
+        <h2 class="section-title">スタッフ紹介</h2>
+        <div class="card staff">
+          <img class="avatar" alt="店長：サトウ" src="https://api.felo.ai/images/s/5bCKgNhmWV">
+          <div>
+            <h3>店長：サトウ</h3>
+            <p class="section-sub">
+              「美容室は緊張する」という方こそ、ぜひお越しください。<br>
+              リラックスできる空間づくりと、丁寧な接客を心がけています。<br>
+              あなたの"なりたい"を一緒に見つけましょう。
+            </p>
+          </div>
+        </div>
+
+        <div style="height:18px"></div>
+        <h2 class="section-title">お客様の声</h2>
+
+        <div class="voices">
+          <blockquote class="card">
+            <p>初めてでしたが、とても丁寧に話を聞いてくれて安心できました。仕上がりも大満足です！</p>
+            <footer>20代 女性</footer>
+          </blockquote>
+          <blockquote class="card">
+            <p>カラーの色味が絶妙でとても綺麗！周りからも褒められました。またお願いします。</p>
+            <footer>30代 女性</footer>
+          </blockquote>
+          <blockquote class="card">
+            <p>お店の雰囲気が良く、居心地が最高です。スタッフさんの距離感もちょうど良くて癒やされました。</p>
+            <footer>40代 女性</footer>
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- ACCESS & RESERVATION -->
+    <section id="access" class="anchor">
+      <div class="container">
+        <h2 class="section-title">アクセス &amp; ご予約</h2>
+
+        <div class="access-grid">
+          <div class="card map">
+            <div>
+              <img class="img" alt="地図" src="https://api.felo.ai/images/s/2w7o1fRYfy">
+              <div style="padding:14px">Google Map Placeholder</div>
+            </div>
+          </div>
+
+          <div class="card info">
+            <h3>〇〇美容室</h3>
+            <p>〒160-0000<br>東京都新宿区〇〇1-2-3</p>
+            <p>※新宿駅から徒歩5分。静かな路地裏にあります。</p>
+            <p>10:00 〜 20:00 (定休日: 火曜日)</p>
+            <p>03-0000-0000</p>
+            <p>Webからのご予約は24時間受付中です</p>
+
+            <a id="reservation" class="big-cta anchor" href="#reservation">今すぐ予約する</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div>〇〇美容室</div>
+      <div>© 2025 〇〇美容室 All Rights Reserved.</div>
+      <div>Design by ケイタ</div>
+    </div>
+  </footer>
 </body>
 </html>
